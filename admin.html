@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Win Shearr — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#eee;font-family:Inter,Arial,sans-serif}.wrap{max-width:1180px;margin:auto;padding:25px 18px 70px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292929;padding:10px 0 22px;margin-bottom:28px}.brand{display:flex;gap:11px;align-items:center;font-weight:900;letter-spacing:.08em}.mark{width:38px;height:38px;border:1px solid #777;display:grid;place-items:center;font-size:11px}.brand small{display:block;color:#666;font-size:8px;letter-spacing:.18em}.top a{font-size:11px;color:#aaa;text-decoration:none}.panel{background:#101010;border:1px solid #292929;padding:23px}.auth{max-width:430px;margin:70px auto}.h{font-size:27px;letter-spacing:-.05em;margin:0 0 8px}.muted{color:#777;font-size:11px;line-height:1.7}.form{display:grid;gap:12px}label{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#888}input,select{width:100%;margin-top:6px;background:#090909;color:#eee;border:1px solid #333;padding:12px;font:inherit;font-size:12px;outline:0}button{border:0;background:#eee;color:#111;padding:13px 16px;font:800 10px Inter;cursor:pointer}.secondary{background:#202020;color:#eee}.danger{color:#e9a5a5;background:#191010;border:1px solid #392525}.msg{display:none;padding:10px;border:1px solid #333;background:#171717;color:#aaa;font-size:11px;margin:12px 0}.grid{display:grid;grid-template-columns:390px 1fr;gap:20px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.inventory-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px}.inventory-head h2{margin:0;font-size:20px}.count{color:#777;font-size:10px}.item{border-top:1px solid #292929;padding:15px 0;display:grid;grid-template-columns:65px 1fr auto;gap:13px;align-items:center}.thumb{width:65px;height:58px;background:#191919 center/cover}.item h3{font-size:13px;margin:0 0 4px}.item p{font-size:9px;color:#777;margin:0}.right{text-align:right}.price{font-size:11px;font-weight:700}.actions{display:flex;gap:7px;margin-top:9px}.small{padding:7px 9px;font-size:9px}.status{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#8f8f8f}.logout{background:transparent;color:#aaa;padding:5px}.file{padding:9px}.hidden{display:none!important}@media(max-width:850px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.item{grid-template-columns:55px 1fr}.right{text-align:left;grid-column:2}.thumb{width:55px;height:55px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><span class="mark">WS</span><div>WIN SHEARR<small>INVENTORY ADMIN</small></div></div><div><a href="index.html">Public site</a> <button id="logout" class="logout hidden">Log out</button></div></header>
+<div id="msg" class="msg"></div>
+
+<section id="authPanel" class="panel auth">
+<h1 class="h">Admin login</h1><p class="muted">Use your Supabase account to manage the Win Shearr inventory.</p>
+<form id="loginForm" class="form">
+<label>Email<input id="email" type="email" placeholder="you@example.com" required></label>
+<label>Password<input id="password" type="password" placeholder="Password" required></label>
+<button>LOG IN</button>
+<button type="button" id="signup" class="secondary">CREATE ACCOUNT</button>
+</form>
+<p class="muted">If email confirmation is enabled in Supabase, confirm the email before logging in.</p>
+</section>
+
+<main id="app" class="grid hidden">
+<section class="panel">
+<h1 class="h" id="formTitle">Add a new part</h1><p class="muted">Parts added here are stored online and appear on the public website.</p>
+<form id="partForm" class="form">
+<div class="row"><label>Brand<select id="brand"><option>Hyundai</option><option>Renault</option><option>Nissan</option></select></label><label>Model<input id="model" required placeholder="i20"></label></div>
+<div class="row"><label>Year<input id="year" type="number" required placeholder="2020"></label><label>Category<select id="category"><option>Engine</option><option>Gearbox</option><option>ECU</option><option>Headlight</option><option>Tail light</option><option>Bumper</option><option>Door</option><option>Bonnet</option><option>Mirror</option><option>Seat / Interior</option><option>Suspension</option><option>Wheel</option><option>Electrical</option><option>Body panel</option><option>Other</option></select></label></div>
+<label>Part name<input id="name" required placeholder="Front left headlight"></label>
+<div class="row"><label>Condition<select id="condition"><option>Good</option><option>Tested</option><option>Used</option><option>Needs inspection</option></select></label><label>Price<input id="price" placeholder="₹4,500 or Ask price"></label></div>
+<label>Part number<input id="partNumber" placeholder="Optional OEM / part number"></label>
+<label>Photo<input id="image" class="file" type="file" accept="image/*"></label>
+<div class="row"><button>＋ SAVE PART</button><button type="button" id="cancel" class="secondary hidden">CANCEL</button></div>
+</form>
+</section>
+
+<section class="panel"><div class="inventory-head"><h2>Inventory</h2><span id="count" class="count"></span></div><div id="inventory"></div></section>
+</main>
+</div>
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import "./config.js";
+const supabase=createClient(window.WS_SUPABASE_URL,window.WS_SUPABASE_PUBLISHABLE_KEY);
+let parts=[], editing=null;
+
+const $=id=>document.getElementById(id);
+function msg(text){$("msg").textContent=text;$("msg").style.display="block";setTimeout(()=>$("msg").style.display="none",3500)}
+function esc(s=""){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function toggleLoggedIn(on){$("authPanel").classList.toggle("hidden",on);$("app").classList.toggle("hidden",!on);$("logout").classList.toggle("hidden",!on)}
+
+async function sessionCheck(){
+  const {data:{session}}=await supabase.auth.getSession();
+  toggleLoggedIn(!!session);
+  if(session) loadParts();
+}
+async function loadParts(){
+  const {data,error}=await supabase.from("parts").select("*").order("created_at",{ascending:false});
+  if(error){msg(error.message);return}
+  parts=data||[];render();
+}
+function render(){
+  $("count").textContent=parts.length+" parts";
+  $("inventory").innerHTML=parts.length?parts.map(p=>`
+  <div class="item">
+    <div class="thumb" style="background-image:url('${p.image_url||"https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=300&q=60"}')"></div>
+    <div><h3>${esc(p.name)}</h3><p>${esc(p.brand)} ${esc(p.model)} • ${esc(p.year)} • ${esc(p.category)} • ${esc(p.condition)} • <span class="status">${esc(p.status)}</span></p>
+      <div class="actions"><button class="small" onclick="window.editPart('${p.id}')">EDIT</button><button class="small danger" onclick="window.deletePart('${p.id}')">DELETE</button></div>
+    </div><div class="right"><div class="price">${esc(p.price||"Ask price")}</div></div>
+  </div>`).join(""):'<p class="muted">No parts yet. Add your first part.</p>';
+}
+async function upload(file){
+  if(!file)return "";
+  const ext=(file.name.split(".").pop()||"jpg").toLowerCase();
+  const path=`${crypto.randomUUID()}.${ext}`;
+  const {error}=await supabase.storage.from("part-images").upload(path,file,{upsert:false,contentType:file.type});
+  if(error)throw error;
+  return supabase.storage.from("part-images").getPublicUrl(path).data.publicUrl;
+}
+$("loginForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const {error}=await supabase.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+  if(error){msg(error.message);return}
+  toggleLoggedIn(true);loadParts();
+});
+$("signup").onclick=async()=>{
+  const email=$("email").value.trim(),password=$("password").value;
+  if(!email||password.length<6){msg("Enter an email and a password of at least 6 characters.");return}
+  const {error}=await supabase.auth.signUp({email,password});
+  if(error)msg(error.message);else msg("Account created. Check your email if confirmation is required.");
+};
+$("logout").onclick=async()=>{await supabase.auth.signOut();toggleLoggedIn(false)};
+$("partForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  try{
+    let image_url=editing?.image_url||"";
+    const file=$("image").files[0];
+    if(file)image_url=await upload(file);
+    const payload={brand:$("brand").value,model:$("model").value.trim(),year:Number($("year").value),category:$("category").value,name:$("name").value.trim(),condition:$("condition").value,price:$("price").value.trim()||"Ask price",part_number:$("partNumber").value.trim(),image_url};
+    let result;
+    if(editing) result=await supabase.from("parts").update(payload).eq("id",editing.id);
+    else result=await supabase.from("parts").insert(payload);
+    if(result.error)throw result.error;
+    msg(editing?"Part updated successfully.":"Part added successfully.");
+    reset();loadParts();
+  }catch(err){msg(err.message)}
+});
+function reset(){editing=null;$("partForm").reset();$("formTitle").textContent="Add a new part";$("cancel").classList.add("hidden")}
+$("cancel").onclick=reset;
+window.editPart=id=>{const p=parts.find(x=>x.id===id);if(!p)return;editing=p;$("brand").value=p.brand;$("model").value=p.model;$("year").value=p.year;$("category").value=p.category;$("name").value=p.name;$("condition").value=p.condition;$("price").value=p.price;$("partNumber").value=p.part_number||"";$("formTitle").textContent="Edit part";$("cancel").classList.remove("hidden");scrollTo({top:0,behavior:"smooth"})};
+window.deletePart=async id=>{if(!confirm("Delete this part?"))return;const {error}=await supabase.from("parts").delete().eq("id",id);if(error)msg(error.message);else{msg("Part deleted.");loadParts()}};
+supabase.auth.onAuthStateChange((_event,session)=>toggleLoggedIn(!!session));
+sessionCheck();
+</script>
+</body>
+</html>
