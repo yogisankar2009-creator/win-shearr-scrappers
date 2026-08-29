@@ -1,84 +1,135 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Win Shearr Scrappers acquires scrap 2-wheelers, 4-wheelers and 6-wheelers in Walajabad, Kancheepuram, Tamil Nadu.">
 <title>Win Shearr Scrappers | Scrap Vehicle Acquisition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="progress" id="progress"></div>
+
 <header class="nav" id="nav">
-  <a class="brand" href="#">
+  <a class="brand" href="#home">
     <img src="logo-reference.png" alt="SFS logo">
     <div><strong>WIN SHEARR SCRAPPERS</strong><small>SCRAP • RECYCLE • REBUILD</small></div>
   </a>
-  <nav><a class="active" href="#home">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#why">Why Us</a><a href="#contact">Contact</a></nav>
-  <a class="phone" href="tel:9344058526">☎ &nbsp;+91 93440 58526</a>
+  <nav id="mainNav">
+    <a class="active" href="#home">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#why">Why Choose Us</a><a href="#process">How It Works</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="phone" href="tel:9344058526"><span>☎</span><b>+91 93440 58526</b><small>Call us anytime</small></a>
   <button class="menu" id="menu" aria-label="Open menu">☰</button>
 </header>
 
 <main>
 <section class="hero" id="home">
-  <div class="hero-bg"></div><div class="hero-overlay"></div><div class="particles"></div>
+  <div class="hero-photo"></div><div class="hero-vignette"></div><div class="hero-glow"></div>
   <div class="hero-content reveal">
-    <p class="kicker"><i></i> TRUST / TRANSPARENCY / TOP VALUE</p>
-    <h1>WE BUY<br><span>SCRAP VEHICLES</span></h1>
-    <p class="tagline">Turn Your Old Vehicles Into Value</p>
+    <div class="trust-pill">✦ &nbsp; CHENNAI'S TRUSTED SCRAP BUYERS</div>
+    <p class="kicker">TRUST / TRANSPARENCY / TOP VALUE</p>
+    <h1>WE BUY<br><span>SCRAP<br>VEHICLES</span></h1>
+    <p class="tagline">Any Vehicle. Any Condition. Best Price.</p>
+    <p class="subline">Instant quote • Free pickup • Hassle-free paperwork</p>
+
     <div class="vehicle-pills">
-      <div class="vehicle-pill reveal delay1"><b>🏍</b><strong>2-WHEELERS</strong></div>
-      <div class="vehicle-pill reveal delay2"><b>🚗</b><strong>4-WHEELERS</strong></div>
-      <div class="vehicle-pill reveal delay3"><b>🚚</b><strong>6-WHEELERS</strong></div>
+      <a href="#quote" class="vehicle-pill reveal delay1"><b>🏍</b><strong>2-WHEELERS</strong></a>
+      <a href="#quote" class="vehicle-pill reveal delay2"><b>🚗</b><strong>4-WHEELERS</strong></a>
+      <a href="#quote" class="vehicle-pill reveal delay3"><b>🚚</b><strong>6-WHEELERS</strong></a>
     </div>
-    <div class="brand-line">HYUNDAI &nbsp; • &nbsp; RENAULT &nbsp; • &nbsp; NISSAN</div>
+    <div class="brand-line"><span>WE DEAL IN</span> <b>HYUNDAI</b><i></i><b>RENAULT</b><i></i><b>NISSAN</b></div>
   </div>
 
   <div class="quote-card reveal delay2" id="quote">
-    <div class="quote-head"><h2>GET A SCRAP <span>QUOTE</span></h2><p>Fill in the details below and we'll get back to you.</p></div>
+    <div class="quote-head"><span class="mini-label">FAST VEHICLE VALUATION</span><h2>GET A <span>SCRAP QUOTE</span></h2><p>Fill in the details below & get a response from our team.</p></div>
     <form id="quoteForm">
       <div class="grid2">
-        <label>Your Name *<input name="customer_name" required placeholder="Enter your name"></label>
-        <label>Phone Number *<input name="phone" required inputmode="tel" placeholder="Enter your phone number"></label>
+        <label>Full Name *<input name="customer_name" required placeholder="Your name"></label>
+        <label>Phone Number *<input name="phone" required inputmode="tel" placeholder="Your phone number"></label>
         <label>Vehicle Type *<select name="vehicle_type" required><option value="">Select vehicle type</option><option>2-Wheeler</option><option>4-Wheeler</option><option>6-Wheeler</option></select></label>
         <label>Brand<select name="brand"><option value="">Select brand</option><option>Hyundai</option><option>Renault</option><option>Nissan</option><option>Other</option></select></label>
-        <label>Model<input name="model" placeholder="e.g. i20, Activa, etc."></label>
+        <label>Model<input name="model" placeholder="e.g. i20, Activa"></label>
         <label>Year<select name="year"><option value="">Select year</option><script>for(let y=new Date().getFullYear();y>=1980;y--)document.write(`<option>${y}</option>`)</script></select></label>
-        <label>Location *<input name="location" required placeholder="Enter your location"></label>
-        <label>Condition<select name="condition"><option value="">Select condition</option><option>Running</option><option>Non-running</option><option>Accident damaged</option><option>Severely damaged</option><option>Unknown</option></select></label>
+        <label>Vehicle Condition<select name="condition"><option value="">Select condition</option><option>Running</option><option>Non-running</option><option>Accident damaged</option><option>Severely damaged</option><option>Unknown</option></select></label>
+        <label>Location *<input name="location" required placeholder="City / area"></label>
       </div>
-      <label>Additional details<textarea name="details" rows="3" placeholder="Tell us anything important about the vehicle..."></textarea></label>
-      <label>Vehicle Photos<input name="photos" type="file" accept="image/*" multiple></label>
-      <button class="submit" type="submit">➤ &nbsp; SUBMIT SCRAP ENQUIRY <span>→</span></button>
-      <p class="safe">♧ &nbsp; Your information is safe with us</p><p id="formMessage" class="form-message"></p>
+      <label>Additional Notes<textarea name="details" rows="3" placeholder="Anything important about the vehicle..."></textarea></label>
+      <label class="photo-input">Vehicle Photos<input name="photos" type="file" accept="image/*" multiple></label>
+      <button class="submit" type="submit">➤ &nbsp; GET INSTANT QUOTE <span>→</span></button>
+      <p class="safe">♧ &nbsp; Your information is safe with us. We never spam you.</p>
+      <p id="formMessage" class="form-message"></p>
     </form>
   </div>
-  <div class="scroll">⌄ &nbsp; SCROLL DOWN</div>
+  <a class="scroll" href="#why">⌄ &nbsp; SCROLL DOWN</a>
 </section>
 
 <section class="benefits" id="why">
-  <article class="reveal"><b>₹</b><div><h3>Best Market Price</h3><p>Get the highest value for your scrap vehicle.</p></div></article>
-  <article class="reveal delay1"><b>ϟ</b><div><h3>Fast & Hassle-Free</h3><p>Quick evaluation and instant response.</p></div></article>
-  <article class="reveal delay2"><b>✓</b><div><h3>Trusted & Professional</h3><p>Transparent process with no hidden charges.</p></div></article>
-  <article class="reveal delay3"><b>♧</b><div><h3>Eco Friendly</h3><p>Help build a cleaner, greener tomorrow.</p></div></article>
+  <article class="reveal"><b>₹</b><div><h3>BEST MARKET PRICE</h3><p>We give top value for your scrap vehicle.</p></div></article>
+  <article class="reveal delay1"><b>▣</b><div><h3>FREE VEHICLE PICKUP</h3><p>Quick pickup from your location.</p></div></article>
+  <article class="reveal delay2"><b>▤</b><div><h3>INSTANT PAYMENT</h3><p>Get paid promptly as applicable.</p></div></article>
+  <article class="reveal delay3"><b>▥</b><div><h3>PAPERWORK ASSISTANCE</h3><p>Guidance through the required process.</p></div></article>
+  <article class="reveal delay4"><b>⌁</b><div><h3>ECO FRIENDLY</h3><p>Recycle, reuse and reduce waste.</p></div></article>
 </section>
 
-<section class="light-section" id="about">
-  <div class="section-tag">01 / ABOUT US</div><div class="split"><div><h2>We turn unwanted vehicles into <em>useful value.</em></h2></div><div><p>Win Shearr Scrappers is focused on acquiring end-of-life, damaged and unwanted vehicles and handling them responsibly. We serve customers around Walajabad and Kancheepuram, Tamil Nadu.</p><p>Our process is built around clear communication, fair evaluation and convenient vehicle hand-over.</p></div></div>
+<section class="process" id="process">
+  <div class="section-heading centered"><span>OUR PROCESS</span><h2>HOW IT WORKS</h2><i></i></div>
+  <div class="steps">
+    <article class="reveal"><div class="step-img">01</div><h3>SHARE DETAILS</h3><p>Fill the form with your vehicle details.</p></article>
+    <div class="arrow">→</div>
+    <article class="reveal delay1"><div class="step-img">02</div><h3>GET QUOTE</h3><p>We'll review the details and contact you.</p></article>
+    <div class="arrow">→</div>
+    <article class="reveal delay2"><div class="step-img">03</div><h3>FREE PICKUP</h3><p>Pickup can be arranged from your location.</p></article>
+    <div class="arrow">→</div>
+    <article class="reveal delay3"><div class="step-img">04</div><h3>COMPLETE</h3><p>Finish the hand-over and documentation.</p></article>
+  </div>
+</section>
+
+<section class="about-card" id="about">
+  <div class="about-copy">
+    <span class="section-label">ABOUT US</span>
+    <h2>WIN SHEARR<br>SCRAPPERS</h2>
+    <p>We acquire old, damaged and unwanted vehicles and aim to make the process straightforward, transparent and convenient.</p>
+    <p>Serving Walajabad, Kancheepuram and nearby areas in Tamil Nadu.</p>
+    <div class="signature">Your Scrap, Our Responsibility.</div>
+    <a class="dark-btn" href="#quote">KNOW MORE ABOUT US →</a>
+  </div>
+  <div class="facility">
+    <div class="facility-image"></div>
+    <div class="stats">
+      <div><strong>10+</strong><span>YEARS OF<br>EXPERIENCE</span></div>
+      <div><strong>5000+</strong><span>HAPPY<br>CUSTOMERS</span></div>
+      <div><strong>25K+</strong><span>VEHICLES<br>SCRAPPED</span></div>
+      <div><strong>100%</strong><span>RESPONSIBLE<br>PROCESS</span></div>
+    </div>
+  </div>
 </section>
 
 <section class="services" id="services">
-  <div class="section-tag">02 / WHAT WE ACQUIRE</div><h2>Vehicles of every size.</h2>
-  <div class="service-grid"><article class="service reveal"><span>01</span><div class="big">🏍</div><h3>2-WHEELERS</h3><p>Bikes, scooters and eligible two-wheel vehicles.</p></article><article class="service reveal delay1"><span>02</span><div class="big">🚗</div><h3>4-WHEELERS</h3><p>Cars, vans and other four-wheel vehicles.</p></article><article class="service reveal delay2"><span>03</span><div class="big">🚚</div><h3>6-WHEELERS</h3><p>Eligible commercial and larger vehicles.</p></article></div>
+  <div class="section-heading"><span>WHAT WE ACQUIRE</span><h2>VEHICLES OF<br><em>EVERY SIZE.</em></h2></div>
+  <div class="service-grid">
+    <article class="service reveal"><span>01</span><div class="big">🏍</div><h3>2-WHEELERS</h3><p>Bikes, scooters and eligible two-wheel vehicles.</p><a href="#quote">GET A QUOTE →</a></article>
+    <article class="service reveal delay1"><span>02</span><div class="big">🚗</div><h3>4-WHEELERS</h3><p>Cars, vans and other four-wheel vehicles.</p><a href="#quote">GET A QUOTE →</a></article>
+    <article class="service reveal delay2"><span>03</span><div class="big">🚚</div><h3>6-WHEELERS</h3><p>Eligible commercial and larger vehicles.</p><a href="#quote">GET A QUOTE →</a></article>
+  </div>
 </section>
 
-<section class="process" id="contact"><div class="section-tag">03 / SIMPLE PROCESS</div><h2>Four steps. <em>No confusion.</em></h2><div class="steps">
-  <article class="reveal"><span>01</span><h3>SUBMIT DETAILS</h3><p>Share basic vehicle information through the form.</p></article>
-  <article class="reveal delay1"><span>02</span><h3>WE CONTACT YOU</h3><p>Our team discusses the vehicle and next steps.</p></article>
-  <article class="reveal delay2"><span>03</span><h3>EVALUATION</h3><p>Vehicle condition and relevant details are assessed.</p></article>
-  <article class="reveal delay3"><span>04</span><h3>COMPLETE</h3><p>Pickup or hand-over and documentation as applicable.</p></article>
-</div></section>
+<section class="contact-strip" id="contact">
+  <div><span>READY TO SCRAP?</span><h2>LET'S TALK ABOUT<br><em>YOUR VEHICLE.</em></h2></div>
+  <a class="gold-btn" href="tel:9344058526">CALL +91 93440 58526 →</a>
+</section>
 </main>
 
-<footer><div><img src="logo-reference.png" alt=""><div><strong>WIN SHEARR SCRAPPERS</strong><p>Walajabad, Kancheepuram, Tamil Nadu</p></div></div><a href="tel:9344058526">+91 93440 58526</a></footer>
+<footer>
+  <div class="footer-brand"><img src="logo-reference.png" alt=""><div><strong>WIN SHEARR<br>SCRAPPERS</strong><p>Your trusted partner for vehicle scrapping.</p></div></div>
+  <div><h4>QUICK LINKS</h4><a href="#home">Home</a><a href="#about">About Us</a><a href="#services">Services</a><a href="#why">Why Choose Us</a><a href="#process">How It Works</a></div>
+  <div><h4>OUR SERVICES</h4><a href="#quote">Vehicle Scrapping</a><a href="#quote">Vehicle Pickup</a><a href="#quote">Vehicle Valuation</a><a href="#quote">Paperwork Assistance</a></div>
+  <div><h4>CONTACT US</h4><p>☎ &nbsp;+91 93440 58526</p><p>⌖ &nbsp;Walajabad, Kancheepuram,<br>Tamil Nadu</p><p>✉ &nbsp;winshearrscrappers@gmail.com</p></div>
+  <div><h4>WHY CHOOSE US?</h4><p>✓ &nbsp;Transparent process</p><p>✓ &nbsp;Fast response</p><p>✓ &nbsp;Convenient pickup</p><p>✓ &nbsp;Responsible recycling</p></div>
+  <div class="copyright">© 2026 Win Shearr Scrappers. All Rights Reserved. <span>Designed for Automobile Lovers.</span></div>
+</footer>
 <script type="module" src="script.js"></script>
-</body></html>
+</body>
+</html>
