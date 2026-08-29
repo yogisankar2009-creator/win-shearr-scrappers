@@ -1,1 +1,1 @@
-window.WS_CONFIG={supabaseUrl:"https://yhncbnwkrdabyxxqcsae.supabase.co",supabaseKey:"sb_publishable_MDAI9Xkq2lp0z3dAUHpkNQ_hkj4I1AV",whatsapp:"919344058526",phoneDisplay:"9344058526"};
+window.WS_CONFIG={supabaseUrl:"https://yhncbnwkrdabyxxqcsae.supabase.co",supabaseKey:"sb_publishable_MDAI9Xkq2lp0z3dAUHpkNQ_hkj4I1AV",phone:"9344058526"};
